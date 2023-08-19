@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-// import axios from 'axios'
+import axios from 'axios'
 import Modal from 'react-bootstrap/Modal';
 import './SignUpForm.css'
 
@@ -23,12 +23,12 @@ export default function SignUp() {
     const payload = {username, email, password};
     console.log(payload)
 
-    // axios.post('http://localhost:1234/api/signup', payload)
-    //   .then( json => {
-    //     console.log(json.data)
-    //     setShow(false)
-    //   })
-    //   .catch( err => console.log(err))
+    axios.post('http://localhost:1234/api/signup', payload)
+      .then( json => {
+        console.log(json.data)
+        setShow(false)
+      })
+      .catch( err => console.log(err))
   }
 
   return (

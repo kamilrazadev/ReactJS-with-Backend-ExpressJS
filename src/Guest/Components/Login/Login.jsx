@@ -1,9 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
-// import axios from 'axios'
+import axios from 'axios'
 import Modal from 'react-bootstrap/Modal';
 import './LoginForm.css'
-import { json } from 'express';
 
 export default function Login() {
 
@@ -22,15 +21,15 @@ export default function Login() {
     const payload = {email, password};
     console.log(payload)
 
-    // axios.post('http://localhost:1234/api/login', payload)
-    //   .then( json => {
-    //     console.log(json.data)
-    //   }
-    //   )
-    //   .catch( err => console.log(err))
+    axios.post('http://localhost:1234/api/login', payload)
+      .then( json => {
+        console.log(json.data)
+      }
+      )
+      .catch( err => console.log(err))
 
 
-    // setShow(false);
+    setShow(false);
   }
 
   return (

@@ -9,7 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function App() {
 
-  const role = 'admin';
+  const role = 'guest';
   return (
 
     <BrowserRouter>
