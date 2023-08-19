@@ -1,4 +1,5 @@
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Page404 from './Page404'
 import Guest from './Guest/App'
 import Admin from './Admin/App'
