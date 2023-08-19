@@ -1,7 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useState } from 'react';
+// import axios from 'axios'
+import Modal from 'react-bootstrap/Modal';
 import './LoginForm.css'
+import { json } from 'express';
 
-export default function LoginForm() {
+export default function Login() {
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,11 +21,30 @@ export default function LoginForm() {
 
     const payload = {email, password};
     console.log(payload)
+
+    // axios.post('http://localhost:1234/api/login', payload)
+    //   .then( json => {
+    //     console.log(json.data)
+    //   }
+    //   )
+    //   .catch( err => console.log(err))
+
+
+    // setShow(false);
   }
 
   return (
     <>
-      <form className="form" onSubmit={loginUser}>
+      <button className='btn btn-secondary mx-1' onClick={handleShow}>
+        Login
+      </button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton className='bg-dark'>
+          <Modal.Title className='text-light'>Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='bg-dark'>
+        <form className="form" onSubmit={loginUser}>
   <div className="field">
     <svg
       className="input-icon"
@@ -63,7 +91,9 @@ export default function LoginForm() {
 
   </div>
 </form>
-
+        </Modal.Body>
+        
+      </Modal>
     </>
   )
 }

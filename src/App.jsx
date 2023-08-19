@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Page404 from './Page404'
 import Guest from './Guest/App'
@@ -9,8 +9,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function App() {
 
-  const role = 'guest';
-
+  const role = 'admin';
   return (
 
     <BrowserRouter>

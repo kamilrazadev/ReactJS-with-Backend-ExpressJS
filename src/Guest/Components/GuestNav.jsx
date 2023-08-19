@@ -2,9 +2,8 @@ import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Login from './Login'
-import SignUp from './SignUp'
+import Login from './Login/Login'
+import SignUp from './SignUp/SignUp'
 
 export default function GuestNav() {
   return (

@@ -3,6 +3,7 @@ import GuestNav from './Components/GuestNav'
 
 export default function App() {
   return (
-    <div><GuestNav /></div>
+    // <div><GuestNav /></div>
+    <div>Guest</div>
   )
 }

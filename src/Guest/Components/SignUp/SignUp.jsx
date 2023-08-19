@@ -1,7 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useState } from 'react';
+// import axios from 'axios'
+import Modal from 'react-bootstrap/Modal';
 import './SignUpForm.css'
 
-export default function SignUpForm() {
+
+export default function SignUp() {
+  
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -13,11 +22,27 @@ export default function SignUpForm() {
 
     const payload = {username, email, password};
     console.log(payload)
+
+    // axios.post('http://localhost:1234/api/signup', payload)
+    //   .then( json => {
+    //     console.log(json.data)
+    //     setShow(false)
+    //   })
+    //   .catch( err => console.log(err))
   }
 
   return (
     <>
-      <form className="form" onSubmit={signUpUser}>
+      <button className='btn btn-outline-secondary mx-1' onClick={handleShow}>
+        SignUp
+      </button>
+
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton className='bg-dark'>
+        <Modal.Title className='text-light'>SignUp</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className='bg-dark'>
+              <form className="form" onSubmit={signUpUser}>
 
       <div className="field">
     <svg
@@ -85,8 +110,9 @@ export default function SignUpForm() {
     </button>
 
   </div>
-</form>
-
-    </>
+            </form>
+      </Modal.Body>
+    </Modal>
+  </>
   )
 }
