@@ -2,10 +2,10 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import AdminNav from './Components/AdminNav'
 import { Link, Route, Routes } from 'react-router-dom'
-import Home from '../Home/Home'
+import Home from './Pages/Home/Home'
 import Brands from './Pages/Brands'
 import Categories from './Pages/Categories'
-import Page404 from '../Page404'
+import Page404 from '../CommonPages/Page404'
 
 export default function App() {
   return (

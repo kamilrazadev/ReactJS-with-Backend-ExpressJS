@@ -5,33 +5,33 @@ import Modal from 'react-bootstrap/Modal';
 import { storage } from '../utils/FirebaseConfig'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export default function AddBrandModal() {
+export default function AddCategoryModal() {
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [addBrandBtn, setAddBrandBtn] = useState("Add Brand");
-    const [brandName, setBrandName] = useState("");
-    const [brandImg, setBrandImg] = useState(null);
+    const [addCategoryBtn, setAddCategoryBtn] = useState("Add Category");
+    const [categoryName, setCategoryName] = useState("");
+    const [categoryImg, setCategoryImg] = useState(null);
 
-    const addBrand = (e) => {
+    const addCategory = (e) => {
 
-        setAddBrandBtn("Please Wait...");
+        setAddCategoryBtn("Please Wait...");
     
         e.preventDefault()
         
-        const storageRef = ref(storage, `brand-images/${brandImg.name}`);
-        uploadBytes(storageRef, brandImg).then((snapshot) => {
+        const storageRef = ref(storage, `category-images/${categoryImg.name}`);
+        uploadBytes(storageRef, categoryImg).then((snapshot) => {
           getDownloadURL(snapshot.ref)
             .then((url) => {
               const payload = {
-                BrandName: brandName, 
-                BrandImg : url
+                CategoryName: categoryName, 
+                CategoryImg : url
               };
 
-            axios.post('http://localhost:1234/api/add-brand', payload)
+            axios.post('http://localhost:1234/api/add-category', payload)
               .then( json => {
                 console.log(json.data)
                 setShow(false);
@@ -50,40 +50,40 @@ export default function AddBrandModal() {
   return (
     <>
       <button className='btn btn-secondary mx-1' onClick={handleShow}>
-        Add Brand
+        Add Category
       </button>
 
       <Modal show={show} onHide={handleClose} backdrop='static'>
         <Modal.Header closeButton className='bg-dark'>
-          <Modal.Title className='text-light'>Add Brand</Modal.Title>
+          <Modal.Title className='text-light'>Add Category</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark'>
 
-        <form className="form" onSubmit={addBrand}>
+        <form className="form" onSubmit={addCategory}>
             <div className="field">
                 
                 <input
-                placeholder="Brand Name"
+                placeholder="Category Name"
                 className="input-field"
                 type="text"
-                value={brandName}
-                onChange={(e) => setBrandName(e.target.value)}
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
                 />
             </div>
             <div className="field">
                 
                 <input 
                 style={{borderRadius: '20px'}}
-                placeholder="Brand Image" 
+                placeholder="Category Image" 
                 className="input-field" 
                 type="file" 
                 id='formFile'
-                onChange={(e) => setBrandImg(e.target.files[0])}  
+                onChange={(e) => setCategoryImg(e.target.files[0])}  
                 />
             </div>
             <div className="btn">
                 <button className="button1">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{addBrandBtn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{addCategoryBtn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </button>
 
             </div>

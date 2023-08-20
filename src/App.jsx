@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Page404 from './Page404'
-import Guest from './Guest/App'
+import Page404 from './CommonPages/Page404'
+import Brands from './CommonPages/Brands'
+import Category from './CommonPages/Category'
+import GuestNav from './Guest/Components/GuestNav';
 import Admin from './Admin/App'
 import User from './User/App'
 import jwtDecode from 'jwt-decode';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { GlobalContext } from './Context/context';
+import Home from './CommonPages/Home';
 
 
 export default function App() {
@@ -34,10 +37,13 @@ export default function App() {
             loginUser?.role == 'user' ? (<User />)
             : 
             (
+              <>
+              <GuestNav />
               <Routes>
-                <Route path='/' element={<Guest />} />
+                <Route path='/' element={<Home />} />
                 <Route path='*' element={<Page404 />} />
               </Routes>
+              </>
             )
           )
         }

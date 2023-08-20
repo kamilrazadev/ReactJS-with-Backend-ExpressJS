@@ -1,7 +1,10 @@
+import Cookies from "js-cookie";
+
 export const reducer = ( state, action ) => {
     switch (action.type) {
         case "LOGOUT":
-            return state        
+            Cookies.set('token', 'undefined')
+            return {...state, user: 'undefined'}        
 
         case "LOGIN_USER":
             return {...state, user: action.user}               

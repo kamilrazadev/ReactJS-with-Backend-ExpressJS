@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import './Home.css'
+import './style.css'
 
-export default function Home() {
+export default function Category() {
     
-    const [brands, setBrands] = useState([]);
+    const [category, setCategory] = useState([]);
 
     useEffect( () => {
-        axios.get('http://localhost:1234/api/get-all-brands')
+        axios.get('http://localhost:1234/api/get-all-category')
             .then( json => {
-                setBrands(json.data.brands)
+                setCategory(json.data.category)
             })
             .catch( (err) => console.log(err.message))
     })
@@ -17,23 +17,23 @@ export default function Home() {
   return (
     <div className='container'>
         <div className='text-center my-5'>
-            <h1>Brands</h1>
-            <p>Our All Registered Brands</p>
+            <h1>Category</h1>
+            <p>Our All Registered Category</p>
         </div>
 
         <div className='row'>
             {
-                brands.map( (val, key) => 
+                category? (category.map( (val, key) => 
                     <div className='col-md-4 my-2' key={key}>  
                         <div className="card">
-                            <img style={{height: '90%'}} src={val.BrandImg} />
+                            <img style={{height: '90%'}} src={val.CategoryImg} />
                             <div className="card__content">
-                                <h2 className="card__title">{val.BrandName}</h2>
+                                <h2 className="card__title">{val.CategoryName}</h2>
                             </div>
                         </div>
 
                     </div>
-                )
+                )) : (<div>Please Wait</div>)
             }
         </div>
 
