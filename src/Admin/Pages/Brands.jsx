@@ -9,7 +9,6 @@ export default function Brands() {
   useEffect( () => {
     axios.get('http://localhost:1234/api/get-all-brands')
       .then( json => {
-        console.log(json.data.brands)
         setBrands(json.data.brands)
       })
       .catch( err => console.log(err))

@@ -15,7 +15,7 @@ export default function App() {
       <div className='container-fluid'>
         <div className='row'>
 
-          <div className='col-md-3 bg-dark' style={{ height: '91.9vh' }}>
+          <div className='col-md-3 bg-dark' style={{minHeight : '100vh'}}>
               <Nav defaultActiveKey='/' className='flex-column'>
                 {
                   <>

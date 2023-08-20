@@ -3,6 +3,9 @@ export const reducer = ( state, action ) => {
         case "LOGOUT":
             return state        
 
+        case "LOGIN_USER":
+            return {...state, user: action.user}               
+
         default:
             return state;
     }

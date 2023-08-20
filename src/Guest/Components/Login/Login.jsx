@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import Modal from 'react-bootstrap/Modal';
 import './LoginForm.css'
+import { GlobalContext } from '../../../Context/context';
 
 export default function Login() {
 
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   const [loginBtn, setLoginBtn] = useState("Login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { state, dispatch } = useContext(GlobalContext);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const loginUser = (e) => {
 
@@ -23,12 +24,16 @@ export default function Login() {
     e.preventDefault()
 
     const payload = {email, password};
-    console.log(payload)
-
     axios.post('http://localhost:1234/api/login', payload)
       .then( json => {
-        console.log(json.data)
-        Cookies.set('token', json.data.token)
+
+        
+
+        dispatch({
+          type : "LOGIN_USER",
+          user : json.data.token
+        })
+
         setShow(false);
       }
       )
