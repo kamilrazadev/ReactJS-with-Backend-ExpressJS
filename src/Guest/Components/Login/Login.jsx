@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import Modal from 'react-bootstrap/Modal';
 import './LoginForm.css'
 
@@ -11,10 +12,13 @@ export default function Login() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [loginBtn, setLoginBtn] = useState("Login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const loginUser = (e) => {
+
+    setLoginBtn("Please Wait...");
 
     e.preventDefault()
 
@@ -24,12 +28,11 @@ export default function Login() {
     axios.post('http://localhost:1234/api/login', payload)
       .then( json => {
         console.log(json.data)
+        Cookies.set('token', json.data.token)
+        setShow(false);
       }
       )
       .catch( err => console.log(err))
-
-
-    setShow(false);
   }
 
   return (
@@ -85,7 +88,7 @@ export default function Login() {
   </div>
   <div className="btn">
     <button className="button1">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{loginBtn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </button>
 
   </div>

@@ -12,11 +12,15 @@ export default function SignUp() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [signupBtn, setSignupBtn] = useState("SignUp");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signUpUser = (e) => {
+
+    setSignupBtn("Please Wait...");
+
 
     e.preventDefault()
 
@@ -106,7 +110,7 @@ export default function SignUp() {
     </div>
   <div className="btn">
     <button className="button1">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SignUp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{signupBtn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </button>
 
   </div>
