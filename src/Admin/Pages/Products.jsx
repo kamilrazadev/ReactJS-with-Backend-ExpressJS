@@ -18,7 +18,7 @@ export default function Products() {
     <>
       <div>
           <div className='d-flex align-items-center justify-content-between mt-3'>
-            <h2>Product</h2>
+            <h2>Products</h2>
             <AddBrandModal />
           </div>
 
@@ -27,7 +27,7 @@ export default function Products() {
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Brand Name</th>
+                    <th scope="col">Product Name</th>
                     <th scope="col">Logo</th>
                   </tr>
                 </thead>
