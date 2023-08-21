@@ -5,6 +5,7 @@ import { Link, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home/Home'
 import Brands from './Pages/Brands'
 import Categories from './Pages/Categories'
+import Products from './Pages/Products'
 import Page404 from '../CommonPages/Page404'
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
                     <Link className='text-light text-decoration-none my-2' to='/'>Home</Link>
                     <Link className='text-light text-decoration-none my-2' to='/brands'>Brand</Link>
                     <Link className='text-light text-decoration-none my-2' to='/categories'>Categories</Link>
+                    <Link className='text-light text-decoration-none my-2' to='/products'>Products</Link>
                   </>
                 }
               </Nav>
@@ -32,6 +34,7 @@ export default function App() {
               <Route path='/' element={<Home />}/>
               <Route path='/brands' element={<Brands />}/>
               <Route path='/categories' element={<Categories />}/>
+              <Route path='/products' element={<Products />}/>
               <Route path='*' element={<Page404 />}/>
             </Routes>
           </div>
