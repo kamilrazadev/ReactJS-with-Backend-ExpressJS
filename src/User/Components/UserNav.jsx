@@ -17,7 +17,7 @@ export default function UserNav() {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary sticky-top">
     <Container>
       <Navbar.Brand href="#home"><h4>E-Store</h4></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -27,6 +27,7 @@ export default function UserNav() {
           <NavLink to='/' className='d-flex align-items-center text-decoration-none mx-2'>Home</NavLink>
           <NavLink to='/brands' className='d-flex align-items-center text-decoration-none mx-2'>Brands</NavLink>
           <NavLink to='/categories' className='d-flex align-items-center text-decoration-none mx-2'>Categories</NavLink>
+          <NavLink to='/products' className='d-flex align-items-center text-decoration-none mx-2'>Products</NavLink>
           <Button className='btn-dark ms-5' onClick={logoutUser}>
             Logout
           </Button>

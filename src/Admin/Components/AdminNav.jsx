@@ -16,7 +16,7 @@ export default function AdminNav() {
   }
 
   return (
-    <Navbar className="bg-primary">
+    <Navbar className="bg-primary sticky-top">
       <Container>
         <Navbar.Brand className='text-light' href="#home">
             <h6>Admin Panel</h6>

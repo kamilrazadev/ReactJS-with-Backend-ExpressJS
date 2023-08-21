@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function GuestNav() {
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary sticky-top">
     <Container>
       <Navbar.Brand href="#home"><h4>E-Store</h4></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />

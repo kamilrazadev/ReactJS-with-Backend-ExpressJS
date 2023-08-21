@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios'
 import Modal from 'react-bootstrap/Modal';
 import { storage } from '../utils/FirebaseConfig'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-//input fields puri banani hain
-export default function AddProductModal() {
+  export default function AddProductModal() {
 
-    const [show, setShow] = useState(false);
+    const [show,  ] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -35,7 +34,7 @@ export default function AddProductModal() {
             .then((url) => {
               const payload = {
                 ProductName : productName, 
-                ProductImg : productImg, 
+                ProductImg : url, 
                 ProductCategory : productCategory, 
                 ProductBrand : productBrand, 
                 ProductPrice : productPrice, 
@@ -44,7 +43,7 @@ export default function AddProductModal() {
                 ProductRating : productRating
               };
 
-            axios.post('http://localhost:1234/api/add-product', payload)
+            axios.post('http://localhost:1234/api/addproducts', payload)
               .then( json => {
                 console.log(json.data)
                 setShow(false);
@@ -59,6 +58,26 @@ export default function AddProductModal() {
 
         });
       }
+
+      const [brands, setBrands] = useState([]);
+
+      useEffect( () => {
+        axios.get('http://localhost:1234/api/get-all-brands')
+          .then( json => {
+            setBrands(json.data.brands)
+          })
+          .catch( err => console.log(err))
+      })
+
+      const [category, setCategory] = useState([]);
+
+      useEffect( () => {
+        axios.get('http://localhost:1234/api/get-all-category')
+          .then( json => {
+            setCategory(json.data.category)
+          })
+          .catch( err => console.log(err))
+      })
 
   return (
     <>
@@ -83,6 +102,85 @@ export default function AddProductModal() {
                 onChange={(e) => setProductName(e.target.value)}
                 />
             </div>
+
+            <div className="field">
+                
+                <input
+                placeholder="Product Discription"
+                className="input-field"
+                type="text"
+                value={productDiscription}
+                onChange={(e) => setProductDiscription(e.target.value)}
+                />
+            </div>
+
+            <div className="field">
+                
+                <input
+                placeholder="Product Stock"
+                className="input-field"
+                type="number"
+                value={productStock}
+                onChange={(e) => setProductStock(e.target.value)}
+                />
+            </div>
+
+            <div className='field'>
+              <input 
+                type="number" 
+                id="points" 
+                name="points" 
+                min="0" 
+                max="5" 
+                step="0.1"
+                placeholder='Product Rating'
+                className="input-field" 
+                value={productRating}
+                onChange={(e) => setProductRating(e.target.value)}
+                />
+            </div>
+
+            <div className="field">
+                
+                <input
+                placeholder="Product Price"
+                className="input-field"
+                type="number"
+                value={productPrice}
+                onChange={(e) => setProductPrice(e.target.value)}
+                />
+            </div>
+
+            <select 
+              className='field' 
+              style={{borderRadius: '20px', border: 'none', padding: '10px 8px'}} 
+              aria-label="Default select example"
+              value={productBrand} 
+              onChange={ (e) => setProductBrand(e.target.value)}
+              >
+              <option >Select Brand</option>
+              {
+                brands.map( (val ,key)=> 
+                <option key={key}>{val.BrandName}</option>
+                )
+              }
+            </select>
+
+            <select 
+              className='field' 
+              style={{borderRadius: '20px', border: 'none', padding: '10px 8px'}} 
+              aria-label="Default select example"
+              value={productCategory} 
+              onChange={ (e) => setProductCategory(e.target.value)}
+            >
+              <option >Select Category</option>
+              {
+                category.map( (val ,key)=> 
+                <option key={key}>{val.CategoryName}</option>
+                )
+              }
+            </select>
+
             <div className="field">
                 
                 <input 
@@ -94,6 +192,7 @@ export default function AddProductModal() {
                 onChange={(e) => setProductImg(e.target.files[0])}  
                 />
             </div>
+
             <div className="btn">
                 <button className="button1">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{addProductBtn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

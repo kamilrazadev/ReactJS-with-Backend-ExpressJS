@@ -2,6 +2,7 @@
     position: relative;
     width: 300px;
     height: 200px;
+    padding: 5px;
     background-color: #f2f2f2;
     border-radius: 10px;
     display: flex;
@@ -13,6 +14,10 @@
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   
+  .product_card {
+    height: 300px;
+  }
+
   .card svg {
     width: 48px;
     fill: #333;
@@ -20,11 +25,12 @@
   }
   
   .card:hover {
-    transform: scale(1.05);
+    transform: scale(1);
     box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
   }
   
   .card__content {
+    text-align: center;
     cursor: pointer;
     position: absolute;
     top: 0;
@@ -69,3 +75,6 @@
     line-height: 1.4;
   }
   
+  .product_card_title {
+    font-weight: 800;
+  }

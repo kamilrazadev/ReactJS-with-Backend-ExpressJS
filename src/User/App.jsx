@@ -5,6 +5,7 @@ import Page404 from '../CommonPages/Page404'
 import Category from '../CommonPages/Category'
 import Brands from '../CommonPages/Brands'
 import { Route, Routes } from 'react-router-dom'
+import Products from './Pages/Products'
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
         <Route path='/' element={<Home />} />
         <Route path='/brands' element={<Brands />} />
         <Route path='/categories' element={<Category />} />
+        <Route path='/products' element={<Products />} />
         <Route path='*' element={<Page404 />} />
       </Routes>
     </>
