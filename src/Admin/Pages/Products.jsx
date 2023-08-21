@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import AddBrandModal from '../Components/AddBrandModal';
+import AddProductModal from '../Components/AddProductModal';
 
 export default function Products() {
 
@@ -19,7 +19,7 @@ export default function Products() {
       <div>
           <div className='d-flex align-items-center justify-content-between mt-3'>
             <h2>Products</h2>
-            <AddBrandModal />
+            <AddProductModal />
           </div>
 
           <div>
@@ -28,7 +28,7 @@ export default function Products() {
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Product Name</th>
-                    <th scope="col">Logo</th>
+                    <th scope="col">Image</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -37,9 +37,9 @@ export default function Products() {
                     product.map( (val, key)=> 
                       <tr key={key}>
                         <th scope="row">{key + 1}</th>
-                        <td>{val.BrandName}</td>
+                        <td>{val.ProductName}</td>
                         <td>
-                          <img style={{width: '40px'}} className='img-fluid' src={val.BrandImg} />
+                          <img style={{width: '40px'}} className='img-fluid' src={val.ProductImg} />
                         </td>
                       </tr>
                     )
