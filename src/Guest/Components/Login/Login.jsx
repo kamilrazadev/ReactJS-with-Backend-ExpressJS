@@ -5,11 +5,13 @@ import Cookies from 'js-cookie'
 import Modal from 'react-bootstrap/Modal';
 import './LoginForm.css'
 import { GlobalContext } from '../../../Context/context';
+import async from 'hbs/lib/async';
 
 export default function Login() {
 
   const [show, setShow] = useState(false);
   const [loginBtn, setLoginBtn] = useState("Login");
+  const [errorMessage, setErrorMessage] = useState(' ');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { state, dispatch } = useContext(GlobalContext);
@@ -18,26 +20,32 @@ export default function Login() {
   const handleShow = () => setShow(true);
 
   const loginUser = (e) => {
-
+    e.preventDefault();
+    if( email == '' || password == ''){
+      setErrorMessage('All Fields are Required');
+    } else {
+      
     setLoginBtn("Please Wait...");
-
-    e.preventDefault()
 
     const payload = {email, password};
     axios.post('http://localhost:1234/api/login', payload)
       .then( json => {
-
-        
-
         dispatch({
           type : "LOGIN_USER",
           user : json.data.token
         })
 
         setShow(false);
+        setLoginBtn('Login')
+        setEmail('');
+        setPassword('');
       }
       )
-      .catch( err => console.log(err))
+      .catch( (err) => {
+        console.log(err)
+        setLoginBtn('Login')
+      })
+    }
   }
 
   return (
@@ -90,6 +98,9 @@ export default function Login() {
       value={password}
       onChange={(e) => setPassword(e.target.value)}  
     />
+  </div>
+  <div style={{color: 'red', textAlign: 'center'}}>
+    {errorMessage}
   </div>
   <div className="btn">
     <button className="button1">

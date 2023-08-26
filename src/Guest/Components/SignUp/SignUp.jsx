@@ -25,13 +25,15 @@ export default function SignUp() {
     e.preventDefault()
 
     const payload = {username, email, password};
-    console.log(payload)
 
     axios.post('http://localhost:1234/api/signup', payload)
       .then( json => {
         console.log(json.data)
-        setShow(false)
-      })
+        setShow(false);
+        setSignupBtn("SignUp");
+        setUsername("");
+        setEmail("");
+        setPassword("");      })
       .catch( err => console.log(err))
   }
 
