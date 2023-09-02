@@ -7,6 +7,7 @@ import Brands from './Pages/Brands'
 import Categories from './Pages/Categories'
 import Products from './Pages/Products'
 import Page404 from '../CommonPages/Page404'
+import Footer from '../CommonPages/Footer'
 
 export default function App() {
   return (
@@ -41,6 +42,8 @@ export default function App() {
         
         </div>
       </div>
+
+      <Footer />
     </>
   )
 }

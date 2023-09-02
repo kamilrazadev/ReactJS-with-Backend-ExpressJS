@@ -69,3 +69,23 @@
     line-height: 1.4;
   }
   
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+
+    background-color: rgb(105, 105, 105);
+    color: rgb(27, 27, 27);
+
+    font-weight: bolder;
+
+  }
+
+  .footer-container p {
+    margin: 0;
+  }
+
+  .footer-container a{
+    color: rgb(0, 0, 209);
+  }

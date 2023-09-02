@@ -6,6 +6,7 @@ import Category from '../CommonPages/Category'
 import Brands from '../CommonPages/Brands'
 import { Route, Routes } from 'react-router-dom'
 import Products from './Pages/Products'
+import Footer from '../CommonPages/Footer'
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path='/products' element={<Products />} />
         <Route path='*' element={<Page404 />} />
       </Routes>
+      <Footer />
     </>
     )
 }

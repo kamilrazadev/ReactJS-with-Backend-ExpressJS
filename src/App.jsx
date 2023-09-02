@@ -10,6 +10,7 @@ import jwtDecode from 'jwt-decode';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { GlobalContext } from './Context/context';
 import Home from './CommonPages/Home';
+import Footer from './CommonPages/Footer';
 
 
 export default function App() {
@@ -43,6 +44,7 @@ export default function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='*' element={<Page404 />} />
               </Routes>
+              <Footer />
               </>
             )
           )
