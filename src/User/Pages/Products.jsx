@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { NavLink } from 'react-router-dom';
 
 export default function Products() {
 
@@ -12,6 +13,10 @@ export default function Products() {
             })
             .catch( (err) => console.log(err.message))
     })
+
+   const addToCart = (productData) => {
+        console.log(productData)
+   }
 
   return (
     <div className='container'>
@@ -31,8 +36,10 @@ export default function Products() {
                         <div className="card__content">
                             <p className="product_card_title">{val.ProductName}</p>
                             <p className='text-dark'>{val.ProductDiscription}</p>
-                            Brand: <p className="product_card_title">{val.ProductBrand}</p>
-                            Category<p className="product_card_title">{val.ProductCategory}</p>
+                            Brand: <p className="product_card_title d-inline me-5">{val.ProductBrand}</p>
+                            Category: <p className="product_card_title d-inline">{val.ProductCategory}</p>
+                            {/* <NavLink className='buy-btn' to='/cart'>Buy Now</NavLink> */}
+                            <NavLink className='buy-btn' onClick={() => addToCart(val)}>Buy Now</NavLink>
                         </div>
                     </div>
 
