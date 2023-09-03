@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
@@ -7,6 +7,14 @@ import { NavLink } from 'react-router-dom';
 import { GlobalContext } from '../../Context/context';
 
 export default function UserNav() {
+
+  const storedCartItems = localStorage.getItem('cartItems');
+  const cartItemsArray = storedCartItems ? JSON.parse(storedCartItems) : [];
+  const noOfItems = cartItemsArray.length;
+
+  useEffect( () => {
+    console.log(noOfItems)
+  }, [cartItemsArray])
 
   const { state, dispatch } = useContext(GlobalContext)
 
@@ -28,6 +36,7 @@ export default function UserNav() {
           <NavLink to='/brands' className='d-flex align-items-center text-decoration-none mx-2'>Brands</NavLink>
           <NavLink to='/categories' className='d-flex align-items-center text-decoration-none mx-2'>Categories</NavLink>
           <NavLink to='/products' className='d-flex align-items-center text-decoration-none mx-2'>Products</NavLink>
+          <NavLink to='/cart' className='d-flex align-items-center text-decoration-none mx-2 btn btn-dark'>Cart</NavLink>
           <Button className='btn-dark ms-5' onClick={logoutUser}>
             Logout
           </Button>

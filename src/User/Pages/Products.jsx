@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { NavLink } from 'react-router-dom';
+import Cart from './Cart';
+
 
 export default function Products() {
 
     const [cartItems, setCartItems] = useState([]); 
     const [product, setProduct] = useState([]);
+
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      }, [cartItems]);
 
     useEffect( () => {
         axios.get('http://localhost:1234/api/get-all-products')
@@ -27,11 +33,22 @@ export default function Products() {
           const updatedProductData = { ...productData, productQuantity: 1, totalPrice: +(productData.ProductPrice)};
           setCartItems([...cartItems, updatedProductData]);
         }
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
       };
 
-   useEffect(() => {
-    console.log(cartItems);
-  }, [cartItems]);
+//    useEffect(() => {
+//     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+// }, [cartItems]);
+
+useEffect(() => {
+    // Retrieve cartItems from localStorage when the component mounts
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
+
 
   return (
     <div className='container'>
