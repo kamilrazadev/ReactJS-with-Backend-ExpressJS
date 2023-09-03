@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Products() {
 
+    const [cartItems, setCartItems] = useState([]); 
     const [product, setProduct] = useState([]);
 
     useEffect( () => {
@@ -14,9 +15,23 @@ export default function Products() {
             .catch( (err) => console.log(err.message))
     })
 
-   const addToCart = (productData) => {
-        console.log(productData)
-   }
+    const addToCart = (productData) => {
+        const existingProductIndex = cartItems.findIndex((item) => item._id === productData._id);
+    
+        if (existingProductIndex !== -1) {
+          const updatedCartItems = [...cartItems];
+          updatedCartItems[existingProductIndex].productQuantity += 1;
+          updatedCartItems[existingProductIndex].totalPrice = +(updatedCartItems[existingProductIndex].ProductPrice) * updatedCartItems[existingProductIndex].productQuantity;          
+          setCartItems(updatedCartItems);
+        } else {
+          const updatedProductData = { ...productData, productQuantity: 1, totalPrice: +(productData.ProductPrice)};
+          setCartItems([...cartItems, updatedProductData]);
+        }
+      };
+
+   useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
 
   return (
     <div className='container'>
@@ -34,11 +49,12 @@ export default function Products() {
                         <img style={{height: '200px'}} src={val.ProductImg} />
                         Price<h4>${val.ProductPrice}</h4>
                         <div className="card__content">
-                            <p className="product_card_title">{val.ProductName}</p>
-                            <p className='text-dark'>{val.ProductDiscription}</p>
-                            Brand: <p className="product_card_title d-inline me-5">{val.ProductBrand}</p>
-                            Category: <p className="product_card_title d-inline">{val.ProductCategory}</p>
-                            {/* <NavLink className='buy-btn' to='/cart'>Buy Now</NavLink> */}
+                            <div>
+                                <p className="product_card_title">{val.ProductName}</p>
+                                <p className='text-dark'>{val.ProductDiscription}</p>
+                                Brand: <p className="product_card_title d-inline me-5">{val.ProductBrand}</p>
+                                Category: <p className="product_card_title d-inline">{val.ProductCategory}</p>
+                            </div>
                             <NavLink className='buy-btn' onClick={() => addToCart(val)}>Buy Now</NavLink>
                         </div>
                     </div>
