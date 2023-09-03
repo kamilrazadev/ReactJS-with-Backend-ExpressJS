@@ -43,7 +43,7 @@ export default function Products() {
                       <tr key={key}>
                         <th scope="row">{key + 1}</th>
                         <td>{val.ProductName}</td>
-                        <td className='text-primary'>{val.ProductPrice}</td>
+                        <td className='text-primary'>{val.ProductPrice}$</td>
                         <td>{val.ProductBrand}</td>
                         <td>{val.ProductCategory}</td>
                         <td className='text-primary'>{val.ProductRating}</td>
