@@ -1,5 +1,6 @@
 .buy-btn {
-    margin-top: 20px;
+    width: fit-content;
+    margin: 0;
     font-weight: bold;
     padding: 5px 10px;
     border: none;
@@ -13,6 +14,10 @@
 .buy-btn:hover {
     transition: 200ms;
     scale: 1.05;
+}
+
+.quantityhandle-btn {
+    font-size: 15px;
 }
 
 .cart-section {

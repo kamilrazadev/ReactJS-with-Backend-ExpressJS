@@ -8,14 +8,6 @@ import { GlobalContext } from '../../Context/context';
 
 export default function UserNav() {
 
-  const storedCartItems = localStorage.getItem('cartItems');
-  const cartItemsArray = storedCartItems ? JSON.parse(storedCartItems) : [];
-  const noOfItems = cartItemsArray.length;
-
-  useEffect( () => {
-    console.log(noOfItems)
-  }, [cartItemsArray])
-
   const { state, dispatch } = useContext(GlobalContext)
 
   const logoutUser = () => {
