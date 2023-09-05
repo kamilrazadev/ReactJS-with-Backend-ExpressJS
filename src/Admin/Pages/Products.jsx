@@ -14,6 +14,18 @@ export default function Products() {
       .catch( err => console.log(err))
   })
 
+  const deleteProduct = async (productId) => {
+    try {
+        const response = await axios.delete(`http://localhost:1234/api/delete-product/${productId}`);
+        if (response.status === 200) {
+            // Product deleted successfully, update the product list
+            setProduct(product.filter((p) => p._id !== productId));
+        }
+    } catch (error) {
+        console.error("Error deleting product:", error);
+    }
+};
+
   return (
     <>
       <div>
@@ -22,7 +34,10 @@ export default function Products() {
             <AddProductModal />
           </div>
 
-          <div>
+          {  product.length === 0 ? (
+          <div>Loading...</div>
+            ) : (
+              <div>
               <table className="table">
                 <thead>
                   <tr>
@@ -34,6 +49,7 @@ export default function Products() {
                     <th scope="col">Rating</th>
                     <th scope="col">Stock</th>
                     <th scope="col">Image</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,6 +67,14 @@ export default function Products() {
                         <td>
                           <img style={{width: '40px'}} className='img-fluid' src={val.ProductImg} />
                         </td>
+                        <td>
+                          <button 
+                            className='btn btn-danger'
+                            onClick={() => deleteProduct(val._id)}
+                          >
+                            Delete
+                          </button>
+                        </td>
                       </tr>
                     )
                   
@@ -58,7 +82,11 @@ export default function Products() {
                 </tbody>
               </table>
 
-            </div>
+            </div>    
+            )
+          }
+
+          
             
       </div>
     </>

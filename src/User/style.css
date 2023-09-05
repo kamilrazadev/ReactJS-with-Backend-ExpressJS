@@ -11,13 +11,39 @@
     text-decoration: none;
 }
 
+.emptyTxt {
+    font-size: 25px;
+    font-weight: 700;
+
+    text-align: center;
+
+    color: red;
+
+}
+
 .buy-btn:hover {
     transition: 200ms;
     scale: 1.05;
 }
+.increase-btn, .decrease-btn{
+    cursor: pointer;
+    font-size: 20px;
+    border: 1px solid rgb(135, 135, 135); 
+    border-radius: 5px;
+    background-color: grey;
+}
 
-.quantityhandle-btn {
-    font-size: 15px;
+.increase-btn:hover, .decrease-btn:hover {
+    background-color: rgb(48, 48, 48);
+    color: white;
+}
+
+.increase-btn {
+    padding: 0 6px 1px 6px;
+}
+
+.decrease-btn {
+    padding: 0 9px 2px 9px;
 }
 
 .cart-section {

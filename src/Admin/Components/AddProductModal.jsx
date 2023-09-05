@@ -143,7 +143,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
             <div className="field">
                 
                 <input
-                placeholder="Product Price"
+                placeholder="Product Price in Dollars"
                 className="input-field"
                 type="number"
                 value={productPrice}

@@ -3,11 +3,13 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import Cart from './Cart';
 import ProductModal from '../Components/productModal';
+import Swal from 'sweetalert2';
+
 
 export default function Products() {
   const [cartItems, setCartItems] = useState([]);
   const [product, setProduct] = useState([]);
-  const [itemQuantity, setItemQuantity] = useState(0);
+  const [itemQuantity, setItemQuantity] = useState(1);
 
   useEffect(() => {
     // Retrieve cartItems from localStorage when the component mounts
@@ -34,14 +36,14 @@ export default function Products() {
     const existingProductIndex = updatedCartItems.findIndex((item) => item._id === productData._id);
 
     if (existingProductIndex !== -1) {
-      // If it's already in the cart, increase its quantity by 1
-      updatedCartItems[existingProductIndex].productQuantity += 1;
+      // If it's already in the cart, increase its quantity by the itemQuantity
+      updatedCartItems[existingProductIndex].productQuantity += itemQuantity;
       updatedCartItems[existingProductIndex].totalPrice =
         updatedCartItems[existingProductIndex].ProductPrice *
         updatedCartItems[existingProductIndex].productQuantity;
     } else {
-      // If it's not in the cart, add it with a quantity of 1
-      const updatedProductData = { ...productData, productQuantity: 1, totalPrice: +productData.ProductPrice };
+      // If it's not in the cart, add it with a quantity of itemQuantity
+      const updatedProductData = { ...productData, productQuantity: itemQuantity, totalPrice: +productData.ProductPrice * itemQuantity };
       updatedCartItems.push(updatedProductData);
     }
 
@@ -50,14 +52,30 @@ export default function Products() {
 
     // Store the updated cartItems in localStorage
     localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Item added to cart',
+      showConfirmButton: false,
+      timer: 1500, // Close the alert after 1.5 seconds
+      width: '300px', // Set a custom width for the modal
+    });
+    
+
+    // Reset itemQuantity to 0
+    setItemQuantity(1);
+
+
   };
 
   const increaseQuantity = () => {
-    console.log('increaseQuantity')
+    setItemQuantity(itemQuantity + 1);
   }
 
   const decreaseQuantity = () => {
-    console.log('decreaseQuantity')
+    if (itemQuantity >= 1) {
+      setItemQuantity(itemQuantity - 1);
+    }
   }
 
   return (
@@ -81,13 +99,17 @@ export default function Products() {
                   Brand: <p className="product_card_title mb-0">{val.ProductBrand}</p>
                   Category: <p className="product_card_title ">{val.ProductCategory}</p>
                 </div>
-                <div className='d-flex align-items-center'>
+                <div className='d-flex align-items-center justify-content-between px-2'>
                   <NavLink className="buy-btn mb-1" onClick={() => addToCart(val)}>
                     Add to Cart
                   </NavLink>
-                  <div> <span className='quantityhandle-btn' onClick={decreaseQuantity}>-</span>  {itemQuantity} <span className='quantityhandle-btn' onClick={increaseQuantity}>+</span> </div>
+                  <div className='d-flex align-items-center'> 
+                    <span className='decrease-btn' onClick={decreaseQuantity}>-</span>  
+                    <p className='px-2 m-0'>{itemQuantity}</p> 
+                    <span className='increase-btn' onClick={increaseQuantity}>+</span> 
+                  </div>
                 </div>
-                  <ProductModal />
+                <ProductModal productData={val} />
               </div>
             </div>
           </div>
